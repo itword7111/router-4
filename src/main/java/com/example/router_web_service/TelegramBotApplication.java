@@ -56,18 +56,20 @@ public class TelegramBotApplication extends TelegramBot {
     }
 
     private void serveCommand(String commandName, Long chatId, String userName)  {
-        BotState botState = botStateCash.get(userName);
-        if(commandName.equals("/quit")){
-            botStateCash.remove(userName);
-            groupCash.remove(userName);
+        try {
+            BotState botState = botStateCash.get(userName);
+            if (commandName.equals("/quit")) {
+                botStateCash.remove(userName);
+                groupCash.remove(userName);
+            } else if (botState != null) {
+                executeCashedCommand(botState, commandName, userName, chatId);
+            } else {
+                executeCommand(commandName, chatId, userName);
+            }
         }
-        else if (botState!=null){
-            executeCashedCommand(botState, commandName, userName, chatId);
+        catch (Exception e){
+            System.out.println("Exception "+ e.getCause());
         }
-        else {
-            executeCommand(commandName, chatId, userName);
-        }
-
     }
     private void RouteRequest(String requestMethod, String requestUrl, Object object){
         try {

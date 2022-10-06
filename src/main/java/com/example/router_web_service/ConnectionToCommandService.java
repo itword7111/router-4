@@ -11,18 +11,24 @@ public class ConnectionToCommandService {
 
     static {
         try {
-            url = new URL(" http://localhost:8081/ws/service-command?wsdl");
+            url = new URL("http://localhost:8081/ws/service-command?wsdl");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    private CommandWsImplService servicehe = new CommandWsImplService(url);
-    private final CommandWs commandServiceMethods = servicehe.getCommandWsImplPort();
+    private CommandWsImplService servicehe ;
+    private CommandWs commandServiceMethods ;
     ConnectionToCommandService(){
 
     }
     public CommandWs getInstance(){
+        try {
+            this.servicehe = new CommandWsImplService(url);
+            this.commandServiceMethods = servicehe.getCommandWsImplPort();
+        }catch (Exception e ){
+            System.out.println(ConnectionToCommandService.class+"   "+e.getCause());
+        }
         return commandServiceMethods;
     }
 }
