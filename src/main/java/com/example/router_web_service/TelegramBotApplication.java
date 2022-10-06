@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class TelegramBotApplication extends TelegramBot {
-    private Logger logger=Logger.getLogger(ConnectionToCommandService.class.getName());
+    private Logger logger=Logger.getLogger(TelegramBotApplication.class.getName());
     private Map<String, BotState> botStateCash = new HashMap<String, BotState>();
     private Map<String, String> groupCash = new HashMap<String, String>();
     private Map<String, String> usernameForCreationCash = new HashMap<String, String>();
