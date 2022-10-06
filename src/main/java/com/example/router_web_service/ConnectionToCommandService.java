@@ -5,8 +5,11 @@ import com.exemple.generate.CommandWsImplService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectionToCommandService {
+    private Logger logger=Logger.getLogger(ConnectionToCommandService.class.getName());
     private static URL url;
 
     static {
@@ -27,6 +30,7 @@ public class ConnectionToCommandService {
             this.servicehe = new CommandWsImplService(url);
             this.commandServiceMethods = servicehe.getCommandWsImplPort();
         }catch (Exception e ){
+            logger.log(Level.WARNING,ConnectionToCommandService.class+"   "+e.getCause());
             System.out.println(ConnectionToCommandService.class+"   "+e.getCause());
         }
         return commandServiceMethods;

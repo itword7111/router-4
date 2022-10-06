@@ -14,6 +14,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,8 +24,11 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class TelegramBotApplication extends TelegramBot {
+    private Logger logger=Logger.getLogger(ConnectionToCommandService.class.getName());
     private Map<String, BotState> botStateCash = new HashMap<String, BotState>();
     private Map<String, String> groupCash = new HashMap<String, String>();
     private Map<String, String> usernameForCreationCash = new HashMap<String, String>();
@@ -69,6 +73,7 @@ public class TelegramBotApplication extends TelegramBot {
         }
         catch (Exception e){
             System.out.println("Exception "+ e.getCause());
+            logger.log(Level.WARNING,"Exception "+ e.getCause());
         }
     }
     private void RouteRequest(String requestMethod, String requestUrl, Object object){
